@@ -1,22 +1,23 @@
 import Boot from "@/components/Boot";
+import CvView from "@/components/cv/CvView";
 import Experience from "@/components/Experience";
+import MotionGate from "@/components/MotionGate";
+import RecruiterLink from "@/components/RecruiterLink";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
 import Stack from "@/components/sections/Stack";
 import Certs from "@/components/sections/Certs";
 import Inside from "@/components/sections/Inside";
-import { getAchievements, getCertifications, getCredits, getProjects, getSite, getStack } from "@/lib/content";
+import { getAllContent } from "@/lib/content";
 
 export default async function Home() {
-  const site = getSite();
-  const projects = await getProjects();
-  const certifications = getCertifications();
-  const achievements = getAchievements();
-  const stack = getStack();
+  const content = await getAllContent();
+  const { site, projects, stack, certifications, achievements, credits } = content;
 
-  return (
+  const experience = (
     <main>
       <Boot lines={site.boot} />
+      <RecruiterLink />
       <Experience
         sceneData={{
           covers: projects.map((p) => p.meta.cover),
@@ -37,9 +38,11 @@ export default async function Home() {
           certifications={certifications}
           achievements={achievements}
           stack={stack}
-          credits={getCredits()}
+          credits={credits}
         />
       </Experience>
     </main>
   );
+
+  return <MotionGate experience={experience} fallback={<CvView {...content} />} />;
 }

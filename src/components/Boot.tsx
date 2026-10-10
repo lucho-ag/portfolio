@@ -10,6 +10,8 @@ import { useScene } from "@/store/useScene";
 gsap.registerPlugin(useGSAP, TextPlugin);
 
 const BAR_SEGMENTS = 24;
+/** Debajo de este ancho se cargan los fotogramas de 960 px (public/sequences/clipN/mobile). */
+const MOBILE_QUERY = "(max-width: 767px)";
 
 /** Acto 0: terminal BIOS que tipea. Es el preloader real: espera a que cargue el clip 1. */
 export default function Boot({ lines }: { lines: string[] }) {
@@ -19,6 +21,11 @@ export default function Boot({ lines }: { lines: string[] }) {
 
   useEffect(() => {
     document.documentElement.style.overflow = booted ? "" : "hidden";
+    // Si el Boot se desmonta antes de terminar (p. ej. MotionGate pasa a la versión estática),
+    // la página no puede quedar sin scroll.
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
   }, [booted]);
 
   useGSAP(
@@ -28,6 +35,7 @@ export default function Boot({ lines }: { lines: string[] }) {
         typing.to(el, { text: lines[i], duration: lines[i].length * 0.02, ease: "none" });
       });
 
+      frameStore.variant = window.matchMedia(MOBILE_QUERY).matches ? "mobile" : "desktop";
       const clip1 = frameStore.loadClip("clip1", (p) => {
         setBootProgress(p);
         const filled = Math.round(p * BAR_SEGMENTS);

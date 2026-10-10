@@ -30,7 +30,7 @@ const out = (...lines: (OutputLine | string)[]): CommandResult => ({
 
 /** Nombre de usuario del prompt: primer nombre en minúsculas, sin acentos. */
 export function handle(site: Site) {
-  return site.name.split(" ")[0].normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  return site.name.split(" ")[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 function findProject(arg: string | undefined, projects: Project[]) {
@@ -113,6 +113,10 @@ export const COMMANDS: Record<string, Command> = {
   contact: {
     description: "Cómo contactarme",
     run: (_, { site }) => out(...site.contact.map((c) => ({ text: `  > ${c.label.padEnd(10)}${c.value}`, href: c.href }))),
+  },
+  cv: {
+    description: "Modo reclutador: CV completo e imprimible",
+    run: () => out({ text: "  > /cv  (abrir el CV completo)", href: "/cv" }),
   },
   credits: {
     description: "Créditos de modelos 3D y recursos",

@@ -206,10 +206,10 @@ export default function Inside({
   );
 }
 
-/** Área con scroll interno. data-lenis-prevent evita que Lenis capture la rueda acá. */
+/** Área con scroll interno (.crt-scroll: Lenis le cede la rueda cuando hay contenido que scrollear). */
 function Scroll({ children }: { children: React.ReactNode }) {
   return (
-    <div data-lenis-prevent className="crt-scroll min-h-0 flex-1 overflow-y-auto pr-2">
+    <div className="crt-scroll min-h-0 flex-1 overflow-y-auto pr-2">
       {children}
     </div>
   );

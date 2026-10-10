@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, type ComponentType, type ReactNode } from "react";
+import { Suspense, useSyncExternalStore, type ComponentType, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, PresentationControls } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
@@ -47,11 +47,37 @@ const OBJECT_LAYOUT: Partial<Record<ObjectId, [number, number, number]>> = {
   floppy: [0.85, -0.42, 0.45],
 };
 
-/** Ubica los objetos del lado opuesto al panel HTML, en proporción al viewport. */
+/** En vertical (mobile) el panel ocupa la parte de abajo: los objetos suben y se achican. */
+const PORTRAIT_LIFT = 0.2;
+const PORTRAIT_SCALE = 0.7;
+
+/**
+ * Ubica los objetos del lado opuesto al panel HTML, en proporción al viewport.
+ * En vertical los centra arriba, porque el panel va abajo y a lo ancho.
+ */
 function Anchor({ side, children }: { side: PauseDef["objectsAt"]; children: ReactNode }) {
-  const width = useThree((s) => s.viewport.width);
+  const { width, height } = useThree((s) => s.viewport);
+  if (width < height) {
+    return (
+      <group position-y={height * PORTRAIT_LIFT} scale={PORTRAIT_SCALE}>
+        {children}
+      </group>
+    );
+  }
   const x = side === "left" ? -width * SIDE_OFFSET : side === "right" ? width * SIDE_OFFSET : 0;
   return <group position-x={x}>{children}</group>;
+}
+
+const COARSE_POINTER = "(pointer: coarse)";
+const subscribePointer = (onChange: () => void) => {
+  const mql = window.matchMedia(COARSE_POINTER);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+};
+
+/** En pantallas táctiles el arrastre 3D competiría con el scroll del dedo: se desactiva. */
+function useCoarsePointer() {
+  return useSyncExternalStore(subscribePointer, () => window.matchMedia(COARSE_POINTER).matches, () => false);
 }
 
 /** Capa 2: único Canvas R3F, transparente. Solo renderiza el objeto de la pausa activa. */
@@ -60,6 +86,7 @@ export default function Objects3D(sceneData: SceneObjectProps) {
   const pause = activePause ? pauseById(activePause) : null;
   const objects = pause?.objects ?? [];
   const active = objects.length > 0;
+  const touch = useCoarsePointer();
 
   return (
     <div
@@ -71,7 +98,7 @@ export default function Objects3D(sceneData: SceneObjectProps) {
         dpr={[1, 2]}
         frameloop={active ? "always" : "demand"}
         camera={{ position: [0, 0, 5], fov: 35 }}
-        className={active ? "pointer-events-auto" : ""}
+        className={active && !touch ? "pointer-events-auto" : ""}
       >
         {/* Key pálida (respeta los colores de las portadas), rim verde fósforo y ambiente teal. */}
         <ambientLight color="#0D1C17" intensity={1.5} />
@@ -87,7 +114,7 @@ export default function Objects3D(sceneData: SceneObjectProps) {
 
         {pause && (
           <Anchor side={pause.objectsAt}>
-            <PresentationControls global snap polar={[-0.4, 0.4]} azimuth={[-Infinity, Infinity]}>
+            <PresentationControls enabled={!touch} global snap polar={[-0.4, 0.4]} azimuth={[-Infinity, Infinity]}>
               <Suspense fallback={null}>
                 {objects.map((id, i) => {
                   const Obj = OBJECTS[id];

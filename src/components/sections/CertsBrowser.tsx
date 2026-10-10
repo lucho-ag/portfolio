@@ -63,8 +63,8 @@ export default function CertsBrowser({
   const titleClass = (i: number) => `font-display text-xl uppercase ${i === selected ? "text-phosphor-hot" : "text-phosphor"}`;
 
   return (
-    <div className="flex flex-col gap-3" onMouseLeave={() => (interacting.current = false)}>
-      <Window subject="CERTIFICATIONS" status={`${certifications.length} FILES`}>
+    <div className="flex max-h-[58vh] flex-col gap-3 md:max-h-[88vh]" onMouseLeave={() => (interacting.current = false)}>
+      <Window subject="CERTIFICATIONS" status={`${certifications.length} FILES`} className="min-h-0 shrink">
         <ul className="space-y-1">
           {certifications.map((c, i) => (
             <li key={c.id} {...itemProps(i)}>
@@ -78,7 +78,7 @@ export default function CertsBrowser({
           ))}
         </ul>
       </Window>
-      <Window subject="ACHIEVEMENTS" status={`${achievements.length} UNLOCKED`}>
+      <Window subject="ACHIEVEMENTS" status={`${achievements.length} UNLOCKED`} className="min-h-0 shrink">
         <ul className="space-y-1">
           {achievements.map((a, j) => {
             const i = certifications.length + j;
@@ -98,7 +98,7 @@ export default function CertsBrowser({
           })}
         </ul>
       </Window>
-      <p className="font-display text-base uppercase text-phosphor-dim">↑↓ Browse · Hover to print</p>
+      <p className="shrink-0 font-display text-base uppercase text-phosphor-dim max-md:hidden">↑↓ Browse · Hover to print</p>
     </div>
   );
 }

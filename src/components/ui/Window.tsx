@@ -16,7 +16,7 @@ export default function Window({
   className?: string;
 }) {
   return (
-    <section data-fx-window className={`relative ${className}`}>
+    <section data-fx-window className={`relative flex flex-col ${className}`}>
       {/* Fondo y grilla: aparecen una vez dibujado el marco. */}
       <div data-fx-surface aria-hidden className="crt-grid absolute inset-0 bg-void/85 backdrop-blur-sm" />
 
@@ -41,13 +41,16 @@ export default function Window({
             <span data-fx="scramble">SUBJECT: {subject}</span>
           </span>
           {status && (
-            <span data-fx="scramble" className="text-phosphor-dim">
+            <span data-fx="scramble" className="text-phosphor-dim max-sm:hidden">
               STATUS: {status}
             </span>
           )}
           <span data-fx-edge="x" aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-phosphor-dim" />
         </header>
-        <div className="flex min-h-0 flex-1 flex-col p-4">{children}</div>
+        {/* Si la ventana tiene alto acotado (mobile), el contenido scrollea adentro. */}
+        <div className="crt-scroll flex min-h-0 flex-1 flex-col overflow-y-auto p-4">
+          {children}
+        </div>
       </div>
     </section>
   );

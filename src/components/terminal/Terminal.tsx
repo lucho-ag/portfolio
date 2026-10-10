@@ -83,7 +83,7 @@ export default function Terminal({ data, active }: { data: TerminalData; active:
 
   return (
     <div className="flex min-h-0 flex-1 flex-col text-sm" onClick={() => inputRef.current?.focus({ preventScroll: true })}>
-      <div ref={scrollRef} data-lenis-prevent className="crt-scroll min-h-0 flex-1 space-y-3 overflow-y-auto pr-2">
+      <div ref={scrollRef} className="crt-scroll min-h-0 flex-1 space-y-3 overflow-y-auto pr-2">
         {entries.map((entry) => (
           <Block key={entry.id} entry={entry} prompt={prompt} play={entry.id === 0 ? active : true} />
         ))}

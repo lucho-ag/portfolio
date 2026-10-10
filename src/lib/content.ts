@@ -74,3 +74,15 @@ export async function getProjectBody(slug: string): Promise<ComponentType> {
   const mod = await import(`@content/projects/${slug}.mdx`);
   return mod.default;
 }
+
+/** Todo el contenido junto: lo usan la home, /cv y la versión estática. */
+export async function getAllContent() {
+  return {
+    site: getSite(),
+    projects: await getProjects(),
+    stack: getStack(),
+    certifications: getCertifications(),
+    achievements: getAchievements(),
+    credits: getCredits(),
+  };
+}

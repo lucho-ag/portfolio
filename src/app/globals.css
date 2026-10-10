@@ -59,6 +59,28 @@ body {
   color: var(--void);
 }
 
+/* Impresión / PDF del modo reclutador: la paleta pasa a tinta negra sobre papel blanco. */
+@media print {
+  :root {
+    --void: #ffffff;
+    --phosphor: #000000;
+    --phosphor-hot: #000000;
+    --phosphor-dim: #555555;
+  }
+
+  html {
+    font-size: 12px;
+  }
+
+  .crt-overlay {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
 /* ---------- CRT overlay ---------- */
 
 .crt-overlay > * {
