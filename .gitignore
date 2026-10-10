@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Fuentes pesadas (videos y modelos originales): no se versionan ni se publican
 /media/
+
+# Notas e instrucciones para asistentes de IA y skills locales: no se publican
+/CLAUDE.md
+/AGENTS.md
+/.claude/
+/skills-lock.json
