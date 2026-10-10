@@ -26,9 +26,6 @@ export default function Hero({ site }: { site: Site }) {
           </h1>
           <p data-fx="scramble" className="mt-2 font-display text-[clamp(1.4rem,3.6vh,2.1rem)] uppercase text-phosphor-hot">
             {site.title}
-          </p>
-          <p className="mt-4 text-phosphor">
-            <span data-fx="type">{site.tagline}</span>
             <span aria-hidden className="crt-cursor text-phosphor-hot">
               _
             </span>

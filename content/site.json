@@ -17,7 +17,7 @@
     }
   ],
   "boot": [
-    "PHOSPHOR BIOS v4.20  (C) 1994",
+    "FLAG BIOS v4.20  (C) 1994",
     "CPU: UADE-486DX2 @ 66MHz ........... OK",
     "MEMORY TEST: 640K ................... OK",
     "MOUNTING /dev/rh124 ................. OK",

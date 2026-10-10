@@ -31,7 +31,7 @@ export default function Terminal({ data, active }: { data: TerminalData; active:
     {
       id: 0,
       lines: [
-        { text: `${data.site.name.toUpperCase()} — PHOSPHOR OS`, tone: "hot" },
+        { text: `${data.site.name.toUpperCase()} — FLAG OS`, tone: "hot" },
         { text: data.site.title },
         { text: "Escribí help para ver los comandos, o usá el menú de arriba.", tone: "dim" },
       ],
