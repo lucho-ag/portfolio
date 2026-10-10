@@ -1,0 +1,6 @@
+[
+  { "group": "LENGUAJES", "items": ["Python", "Java", "SQL"] },
+  { "group": "SISTEMAS & CLOUD", "items": ["Linux (Red Hat)", "Google Cloud"] },
+  { "group": "BASES DE DATOS", "items": ["SQL Server", "SQL Server Management Studio"] },
+  { "group": "HERRAMIENTAS", "items": ["Git", "GitHub", "Visual Studio Code", "IntelliJ IDEA"] }
+]

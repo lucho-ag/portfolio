@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Fuentes pesadas (videos y modelos originales): no se versionan ni se publican
+/media/

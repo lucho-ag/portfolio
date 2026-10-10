@@ -1,0 +1,32 @@
+{
+  "name": "Luciano Agostino",
+  "title": "Estudiante de Ingeniería en Informática",
+  "tagline": "Desarrollo de software y gestión de datos. Java, Python, SQL y Linux.",
+  "about": "Estudiante de 2.º año de Ingeniería en Informática en UADE, distinguido con diploma y mención de honor por mi desempeño académico en el primer año. Me enfoco en el desarrollo de software y la gestión de datos: programo en Java y Python, trabajo con bases de datos SQL y manejo entornos Linux con certificación de Red Hat. Tengo experiencia previa en el sector bancario (ICBC) y desarrollé oratoria, negociación y comunicación participando en Modelos de Naciones Unidas. Inglés B2 (First Certificate).",
+  "location": "Quilmes, Buenos Aires",
+  "experience": [
+    {
+      "role": "Pasante",
+      "company": "ICBC Argentina",
+      "period": "Ene 2025 – Feb 2025",
+      "highlights": [
+        "Apoyo en la gestión de procesos internos de la sucursal bajo estándares de calidad y seguridad bancaria.",
+        "Primer punto de contacto para clientes: resolución de consultas sobre productos y derivación de casos complejos.",
+        "Organización y auditoría de legajos físicos y digitales, cuidando la integridad de información sensible."
+      ]
+    }
+  ],
+  "boot": [
+    "PHOSPHOR BIOS v4.20  (C) 1994",
+    "CPU: UADE-486DX2 @ 66MHz ........... OK",
+    "MEMORY TEST: 640K ................... OK",
+    "MOUNTING /dev/rh124 ................. OK",
+    "DETECTING CRT ARRAY ................. 24 FOUND",
+    "LOADING SEQUENCE clip1"
+  ],
+  "contact": [
+    { "label": "LINKEDIN", "value": "linkedin.com/in/luciano-agostino", "href": "https://www.linkedin.com/in/luciano-agostino" },
+    { "label": "EMAIL", "value": "tu@email.com", "href": "mailto:tu@email.com" },
+    { "label": "GITHUB", "value": "github.com/usuario", "href": "https://github.com/usuario" }
+  ]
+}

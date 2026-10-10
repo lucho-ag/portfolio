@@ -1,0 +1,30 @@
+[
+  {
+    "id": "rh124",
+    "title": "Red Hat System Administration I (RH124)",
+    "issuer": "Red Hat Academy",
+    "date": "",
+    "url": ""
+  },
+  {
+    "id": "gcp-foundations",
+    "title": "Google Cloud Computing Foundations",
+    "issuer": "Google",
+    "date": "2025-09",
+    "url": ""
+  },
+  {
+    "id": "cambridge-b2-first",
+    "title": "B2 First Certificate in English",
+    "issuer": "Cambridge English",
+    "date": "2024",
+    "url": ""
+  },
+  {
+    "id": "coderhouse-python",
+    "title": "Curso de Python",
+    "issuer": "Coderhouse",
+    "date": "2024-04",
+    "url": ""
+  }
+]

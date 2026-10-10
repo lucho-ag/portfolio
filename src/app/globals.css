@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --void: #040806;
+  --ambient: #0d1c17;
+  --teal-dim: #3e5c55;
+  --phosphor: #39ff7a;
+  --phosphor-dim: #1e7a45;
+  --phosphor-hot: #b8ffc9;
+  --beige: #cfc6ae;
+  --alert: #ff4433;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void: var(--void);
+  --color-ambient: var(--ambient);
+  --color-teal-dim: var(--teal-dim);
+  --color-phosphor: var(--phosphor);
+  --color-phosphor-dim: var(--phosphor-dim);
+  --color-phosphor-hot: var(--phosphor-hot);
+  --color-beige: var(--beige);
+  --color-alert: var(--alert);
+  --font-display: var(--font-vt323), monospace;
+  --font-mono: var(--font-plex-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--void);
+  /* Tipografía fluida: todo el layout usa rem, así escala con el alto/ancho de la pantalla. */
+  font-size: clamp(13px, 0.9vh + 0.45vw, 18px);
+  /* La experiencia es a pantalla completa: se oculta la barra pero el scroll sigue funcionando. */
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  /* clip (no hidden) para no romper el position: fixed del pin de ScrollTrigger. */
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--void);
+  color: var(--phosphor);
+  font-family: var(--font-mono);
+}
+
+/* Scroll interno de las ventanas del acto 4: barra fina en fósforo. */
+.crt-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--phosphor-dim) transparent;
+}
+
+::selection {
+  background: var(--phosphor);
+  color: var(--void);
+}
+
+/* ---------- CRT overlay ---------- */
+
+.crt-overlay > * {
+  position: absolute;
+  inset: 0;
+}
+
+.crt-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgb(4 8 6 / 0.35) 3px
+  );
+  animation: crt-flicker 6s infinite steps(1);
+}
+
+.crt-grain {
+  /* Más grande que la pantalla: el salto de la animación nunca deja bordes sin grano a la vista. */
+  inset: -10%;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: crt-grain 0.4s steps(3) infinite;
+}
+
+.crt-vignette {
+  background: radial-gradient(ellipse at center, transparent 55%, rgb(4 8 6 / 0.85) 100%);
+}
+
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  47% { opacity: 0.85; }
+  48% { opacity: 1; }
+  83% { opacity: 0.92; }
+}
+
+@keyframes crt-grain {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-3%, 2%); }
+  66% { transform: translate(2%, -3%); }
+}
+
+/* ---------- UI de terminal ---------- */
+
+/* Grilla tenue de fondo de las ventanas. */
+.crt-grid {
+  background-image:
+    linear-gradient(rgb(30 122 69 / 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(30 122 69 / 0.09) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+}
+
+/* Marcas de esquina de las ventanas. */
+.crt-corner {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-color: var(--phosphor);
+  pointer-events: none;
+}
+
+/* Cursor y avisos que parpadean en seco, como un terminal (nunca con fade). */
+.crt-cursor,
+.crt-blink {
+  animation: crt-blink 1s steps(1) infinite;
+}
+
+@keyframes crt-blink {
+  50% { opacity: 0; }
+}
+
+/* Glitch esporádico: el nombre se desplaza y se separa en canales un instante. */
+.crt-glitch {
+  text-shadow: 0 0 12px var(--phosphor);
+  animation: crt-glitch 6s steps(1) infinite;
+}
+
+@keyframes crt-glitch {
+  0%, 91%, 100% {
+    transform: none;
+    text-shadow: 0 0 12px var(--phosphor);
+  }
+  92% {
+    transform: translateX(3px);
+    text-shadow: -3px 0 var(--teal-dim), 3px 0 var(--phosphor-hot), 0 0 12px var(--phosphor);
+  }
+  93% {
+    transform: translateX(-2px) skewX(-8deg);
+    text-shadow: 4px 0 var(--teal-dim), -2px 0 var(--phosphor-hot), 0 0 12px var(--phosphor);
+  }
+  94.5% {
+    transform: translateX(1px);
+    text-shadow: -1px 0 var(--teal-dim), 1px 0 var(--phosphor-hot), 0 0 12px var(--phosphor);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-cursor,
+  .crt-blink,
+  .crt-glitch {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-scanlines,
+  .crt-grain {
+    animation: none;
+  }
 }

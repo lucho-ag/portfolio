@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#3E5C55"/>
+      <rect y="4" width="6" height="2" fill="#0D1C17" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#scan)"/>
+  <polygon points="0,700 1024,420 1024,520 0,800" fill="#FF4433" opacity="0.9"/>
+  <polygon points="0,740 1024,460 1024,475 0,755" fill="#040806" opacity="0.6"/>
+  <text x="512" y="250" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="92" fill="#CFC6AE">BYTEBANK</text>
+  <text x="512" y="315" text-anchor="middle" font-family="Courier New, monospace" font-size="32" fill="#040806">JAVA CONSOLE EDITION</text>
+  <text x="250" y="560" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="150" fill="#CFC6AE">$_</text>
+  <text x="512" y="880" text-anchor="middle" font-family="Courier New, monospace" font-size="34" fill="#CFC6AE">ACCOUNTS · TRANSFERS · AUDIT</text>
+</svg>

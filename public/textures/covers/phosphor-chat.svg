@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <pattern id="dots" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#040806"/>
+      <rect x="0" y="0" width="3" height="3" fill="#1E7A45"/>
+      <rect x="4" y="4" width="2" height="2" fill="#0D1C17"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0.35" stop-color="#39FF7A" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#39FF7A" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#39FF7A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#dots)"/>
+  <rect width="1024" height="1024" fill="url(#glow)"/>
+  <g fill="none" stroke="#39FF7A" stroke-width="3" opacity="0.6">
+    <circle cx="512" cy="512" r="230"/>
+    <circle cx="512" cy="512" r="420" stroke-dasharray="12 10"/>
+  </g>
+  <g fill="#39FF7A">
+    <rect x="300" y="380" width="120" height="70"/>
+    <polygon points="320,450 345,450 320,475"/>
+    <rect x="604" y="560" width="120" height="70" fill="#B8FFC9"/>
+    <polygon points="704,630 680,630 704,655" fill="#B8FFC9"/>
+  </g>
+  <text x="512" y="250" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="78" fill="#39FF7A">PHOSPHOR</text>
+  <text x="512" y="320" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="56" fill="#B8FFC9">CHAT</text>
+  <text x="512" y="790" text-anchor="middle" font-family="Courier New, monospace" font-size="34" fill="#1E7A45">REALTIME · ROOMS · v1.0</text>
+  <text x="512" y="850" text-anchor="middle" font-family="Courier New, monospace" font-size="28" fill="#39FF7A">&gt; CONNECTED_</text>
+</svg>
