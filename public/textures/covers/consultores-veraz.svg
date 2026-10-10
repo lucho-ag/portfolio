@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1C2A4A" stroke-width="2"/>
+    </pattern>
+    <radialGradient id="depth" cx="50%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#14224A" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0B132B"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="#0B132B"/>
+  <rect width="1024" height="1024" fill="url(#grid)"/>
+  <rect width="1024" height="1024" fill="url(#depth)"/>
+  <!-- Escudo con check (confianza). -->
+  <g transform="translate(220 560)">
+    <path d="M0 -110 L95 -75 L95 10 Q95 85 0 125 Q-95 85 -95 10 L-95 -75 Z" fill="#14B8A6"/>
+    <path d="M-42 5 L-10 38 L48 -30" stroke="#0B132B" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Pasos 01–04. -->
+  <g font-family="Courier New, monospace" font-size="30" font-weight="bold" fill="#5EEAD4">
+    <text x="760" y="480">01</text><text x="800" y="560">02</text><text x="760" y="640">03</text><text x="700" y="715">04</text>
+  </g>
+  <text x="512" y="240" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="66" letter-spacing="6" fill="#F8FAFC">CONSULTORES</text>
+  <text x="512" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="66" letter-spacing="14" fill="#14B8A6">VERAZ</text>
+  <text x="512" y="820" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" letter-spacing="3" fill="#CBD5E1">ASESORÍA CREDITICIA</text>
+  <text x="512" y="870" text-anchor="middle" font-family="Courier New, monospace" font-size="24" fill="#5EEAD4">leads → Google Sheets</text>
+</svg>

@@ -7,6 +7,8 @@ import { createMasterTimeline } from "@/animation/timeline";
 import { useScene } from "@/store/useScene";
 import SequenceCanvas from "@/sequence/SequenceCanvas";
 import Objects3D, { type SceneObjectProps } from "@/scene/Objects3D";
+import ChannelSwitch from "./ChannelSwitch";
+import Hud from "./Hud";
 import PowerOn from "./PowerOn";
 import SmoothScroll from "./SmoothScroll";
 
@@ -23,7 +25,8 @@ export default function Experience({ children, sceneData }: { children: ReactNod
   useGSAP(
     () => {
       if (!booted) return;
-      createMasterTimeline(stageRef.current!);
+      const { dispose } = createMasterTimeline(stageRef.current!);
+      return dispose;
     },
     { scope: stageRef, dependencies: [booted], revertOnUpdate: true },
   );
@@ -37,6 +40,8 @@ export default function Experience({ children, sceneData }: { children: ReactNod
         <div className="relative z-20 h-full w-full">{children}</div>
         <PowerOn />
       </div>
+      <ChannelSwitch />
+      <Hud />
     </>
   );
 }

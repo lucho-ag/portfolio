@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="#040806"/>
+  <g stroke="#1E7A45" stroke-width="3" opacity="0.9">
+    <line x1="170" y1="430" x2="300" y2="330"/><line x1="300" y1="330" x2="250" y2="600"/>
+    <line x1="170" y1="430" x2="250" y2="600"/><line x1="250" y1="600" x2="380" y2="740"/>
+    <line x1="300" y1="330" x2="430" y2="180"/><line x1="720" y1="330" x2="850" y2="440"/>
+    <line x1="850" y1="440" x2="780" y2="620"/><line x1="720" y1="330" x2="780" y2="620"/>
+    <line x1="780" y1="620" x2="650" y2="760"/><line x1="720" y1="330" x2="600" y2="190"/>
+    <line x1="380" y1="740" x2="650" y2="760"/><line x1="430" y1="180" x2="600" y2="190"/>
+  </g>
+  <g fill="#39FF7A">
+    <circle cx="170" cy="430" r="14"/><circle cx="300" cy="330" r="20"/><circle cx="250" cy="600" r="16"/>
+    <circle cx="380" cy="740" r="12"/><circle cx="430" cy="180" r="12"/><circle cx="720" cy="330" r="20"/>
+    <circle cx="850" cy="440" r="14"/><circle cx="780" cy="620" r="16"/><circle cx="650" cy="760" r="12"/>
+    <circle cx="600" cy="190" r="12"/>
+  </g>
+  <g fill="#B8FFC9"><circle cx="300" cy="330" r="7"/><circle cx="720" cy="330" r="7"/></g>
+  <text x="512" y="270" text-anchor="middle" font-family="Courier New, monospace" font-weight="bold" font-size="92" fill="#39FF7A">STARFNET</text>
+  <text x="512" y="318" text-anchor="middle" font-family="Courier New, monospace" font-size="28" fill="#1E7A45">red social profesional</text>
+  <text x="512" y="840" text-anchor="middle" font-family="Courier New, monospace" font-size="30" fill="#B8FFC9">JAVA · AVL · GRAFOS · TDA</text>
+  <text x="512" y="890" text-anchor="middle" font-family="Courier New, monospace" font-size="24" fill="#1E7A45">TPO PROGRAMACION II · UADE</text>
+</svg>

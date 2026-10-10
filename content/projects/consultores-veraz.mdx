@@ -1,0 +1,26 @@
+export const meta = {
+  title: "Consultores Veraz",
+  summary: "Landing de alta conversión para asesoría crediticia, con formulario validado que registra leads en Google Sheets sin backend.",
+  year: 2026,
+  stack: ["React 19", "Vite", "Tailwind CSS v4", "React Hook Form", "Google Apps Script"],
+  status: "COMPLETED",
+  cover: "/textures/covers/consultores-veraz.svg",
+  repo: "https://github.com/lucho-ag/landing-consultoria",
+  demo: "",
+  order: 3,
+};
+
+## El problema
+
+Un servicio de orientación y rectificación de información crediticia necesitaba una landing sobria,
+de autoridad técnica, que generara confianza y capturara consultas calificadas.
+
+## Lo que hice
+
+- **Diseño fintech corporativo:** secciones de servicios, metodología en 4 pasos y sellos de
+  confianza visibles desde el primer vistazo.
+- **Formulario de diagnóstico** con React Hook Form: validación en tiempo real, mensajes accesibles
+  vinculados con `aria-describedby` y estado de envío.
+- **Captura de leads serverless:** el formulario publica en un webhook de Google Apps Script que
+  agrega cada consulta a una planilla de Google Sheets, sin base de datos ni costos de servidor.
+- **Deploy en Vercel** con compresión y cabeceras de seguridad.

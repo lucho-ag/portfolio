@@ -73,6 +73,54 @@ class FrameStore {
     }
   }
 
+  /** Clip al que pertenece un fotograma global. */
+  private clipOf(index: number): ClipId {
+    let start = 0;
+    for (const c of CLIPS) {
+      if (index < start + c.frameCount) return c.id;
+      start += c.frameCount;
+    }
+    return CLIPS[CLIPS.length - 1].id;
+  }
+
+  /**
+   * Espera a que un fotograma esté descargado y decodificado (lo usa el HUD antes de mostrar
+   * un destino). Si su clip todavía no bajó, lo pide primero. `timeoutMs` evita colgarse.
+   */
+  async ready(index: number, timeoutMs = 4000): Promise<void> {
+    const i = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(index)));
+    const deadline = performance.now() + timeoutMs;
+    const load = this.loadClip(this.clipOf(i));
+    await Promise.race([load, new Promise((r) => setTimeout(r, timeoutMs))]);
+    this.setCenter(i);
+    while (!this.bitmaps.has(i) && performance.now() < deadline) {
+      await new Promise((r) => setTimeout(r, 16));
+    }
+  }
+
+  /**
+   * Antes de un recorrido del HUD: se para en `from` mirando en dirección `dir` y espera a que estén
+   * listos los primeros fotogramas del trayecto, así la reproducción arranca sin tirones.
+   */
+  async prime(from: number, dir: 1 | -1, frames = 8, timeoutMs = 1200): Promise<void> {
+    const start = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(from)));
+    // Un salto al capítulo vecino cruza a lo sumo un clip: alcanza con el actual y el siguiente.
+    const ahead = Math.max(0, Math.min(TOTAL_FRAMES - 1, start + dir * CLIPS[0].frameCount));
+    const deadline = performance.now() + timeoutMs;
+    await Promise.race([
+      Promise.all([this.loadClip(this.clipOf(start)), this.loadClip(this.clipOf(ahead))]),
+      new Promise((r) => setTimeout(r, timeoutMs)),
+    ]);
+    this.center = start;
+    this.direction = dir;
+    this.evict();
+    this.pump();
+    const needed = Array.from({ length: frames }, (_, k) => start + k * dir).filter((i) => i >= 0 && i < TOTAL_FRAMES);
+    while (needed.some((i) => !this.bitmaps.has(i)) && performance.now() < deadline) {
+      await new Promise((r) => setTimeout(r, 16));
+    }
+  }
+
   /** Lo llama el canvas en cada frame: mueve la ventana de decodificación. */
   setCenter(index: number) {
     const i = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(index)));

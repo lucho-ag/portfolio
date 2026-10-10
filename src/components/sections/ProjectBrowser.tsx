@@ -7,6 +7,7 @@ import { useScene } from "@/store/useScene";
 
 const STATUS_COLOR: Record<string, string> = {
   ONLINE: "bg-phosphor-hot crt-blink",
+  COMPLETED: "bg-phosphor",
   "IN DEV": "bg-alert",
   ARCHIVED: "bg-teal-dim",
 };

@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
+  CHAPTERS,
   CLIPS,
   INSIDE_SCROLL_LENGTH,
   POWER_ON_LENGTH,
@@ -11,6 +12,7 @@ import {
   type PauseId,
 } from "@/sequence/manifest";
 import { frameState } from "@/sequence/frameState";
+import { emitProgress, registerNavigation } from "./navigation";
 import { useScene } from "@/store/useScene";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +53,7 @@ export function createMasterTimeline(stage: HTMLElement) {
         const seg = segments.find((s) => t >= s.start && t < s.end) ?? segments[segments.length - 1];
         setActiveAct(seg.act);
         setActivePause(seg.pause);
+        emitProgress(t);
       },
     },
   });
@@ -105,5 +108,13 @@ export function createMasterTimeline(stage: HTMLElement) {
   // y ScrollTrigger comprimiría todo (las pausas quedarían corridas respecto del manifest).
   tl.to({}, { duration: INSIDE_SCROLL_LENGTH }, cursor);
 
-  return tl;
+  // Capítulos del HUD: cada pausa con su panel ya encendido, el acto 4 con la interfaz prendida.
+  const anchors = CHAPTERS.map(({ anchor }) => {
+    if (anchor === "start") return 0;
+    if (anchor === "inside") return tl.labels.inside + 2;
+    return tl.labels[anchor] + PANEL_FADE;
+  });
+  const unregister = registerNavigation(tl, anchors);
+
+  return { timeline: tl, dispose: unregister };
 }

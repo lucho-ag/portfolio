@@ -63,7 +63,7 @@ export default function CertsBrowser({
   const titleClass = (i: number) => `font-display text-xl uppercase ${i === selected ? "text-phosphor-hot" : "text-phosphor"}`;
 
   return (
-    <div className="flex max-h-[58vh] flex-col gap-3 md:max-h-[88vh]" onMouseLeave={() => (interacting.current = false)}>
+    <div className="flex max-h-[58vh] flex-col gap-3 md:max-h-[80vh]" onMouseLeave={() => (interacting.current = false)}>
       <Window subject="CERTIFICATIONS" status={`${certifications.length} FILES`} className="min-h-0 shrink">
         <ul className="space-y-1">
           {certifications.map((c, i) => (

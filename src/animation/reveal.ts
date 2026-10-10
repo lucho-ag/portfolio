@@ -98,8 +98,9 @@ export function buildReveal(scope: HTMLElement): gsap.core.Timeline | null {
         tl.to(
           el,
           {
-            // preserveSpaces: respeta los espacios dobles (columnas alineadas en la terminal).
-            text: { value: escapeHtml(text), preserveSpaces: true },
+            // preserveSpaces convierte los espacios en no separables: solo cuando hay columnas
+            // alineadas con espacios dobles (terminal); si no, el texto tiene que poder cortar línea.
+            text: { value: escapeHtml(text), preserveSpaces: /\s{2,}/.test(text) },
             duration: gsap.utils.clamp(0.4, 1.6, text.length * 0.025),
             ease: "none",
           },

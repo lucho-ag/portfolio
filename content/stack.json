@@ -1,6 +1,39 @@
 [
-  { "group": "LENGUAJES", "items": ["Python", "Java", "SQL"] },
-  { "group": "SISTEMAS & CLOUD", "items": ["Linux (Red Hat)", "Google Cloud"] },
-  { "group": "BASES DE DATOS", "items": ["SQL Server", "SQL Server Management Studio"] },
-  { "group": "HERRAMIENTAS", "items": ["Git", "GitHub", "Visual Studio Code", "IntelliJ IDEA"] }
+  {
+    "group": "LENGUAJES",
+    "items": [
+      "Python",
+      "Java",
+      "SQL",
+      "JavaScript"
+    ]
+  },
+  {
+    "group": "FRONTEND",
+    "items": [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "React Hook Form"
+    ]
+  },
+  {
+    "group": "DATOS & CLOUD",
+    "items": [
+      "SQL Server",
+      "Google Sheets + Apps Script",
+      "Google Cloud"
+    ]
+  },
+  {
+    "group": "SISTEMAS & HERRAMIENTAS",
+    "items": [
+      "Linux (Red Hat)",
+      "Git",
+      "GitHub",
+      "Vercel",
+      "VS Code",
+      "IntelliJ IDEA"
+    ]
+  }
 ]

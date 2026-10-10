@@ -54,6 +54,12 @@ body {
   scrollbar-color: var(--phosphor-dim) transparent;
 }
 
+/* Foco de teclado visible y en paleta (botones del HUD, menús, links). */
+:focus-visible {
+  outline: 1px solid var(--phosphor-hot);
+  outline-offset: 2px;
+}
+
 ::selection {
   background: var(--phosphor);
   color: var(--void);
@@ -121,6 +127,49 @@ body {
   0% { transform: translate(0, 0); }
   33% { transform: translate(-3%, 2%); }
   66% { transform: translate(2%, -3%); }
+}
+
+/* Estática del cambio de canal: ruido que salta y una banda oscura que rueda. */
+.crt-static {
+  background-color: var(--void);
+}
+
+.crt-static::before,
+.crt-static::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.crt-static::before {
+  inset: -20%;
+  opacity: 0.45;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.22  0 0 0 0 1  0 0 0 0 0.48  0 0 0 1.6 -0.3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: crt-static-jump 0.18s steps(3) infinite;
+}
+
+.crt-static::after {
+  inset-inline: 0;
+  top: -30%;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgb(4 8 6 / 0.85) 45%, rgb(57 255 122 / 0.08) 55%, transparent);
+  animation: crt-roll 0.9s linear infinite;
+}
+
+/* Apagada no anima: no gasta GPU mientras no hay cambio de canal. */
+.crt-static[aria-hidden="true"]::before,
+.crt-static[aria-hidden="true"]::after {
+  animation: none;
+}
+
+@keyframes crt-static-jump {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-6%, 4%); }
+  66% { transform: translate(5%, -5%); }
+}
+
+@keyframes crt-roll {
+  to { transform: translateY(440%); }
 }
 
 /* ---------- UI de terminal ---------- */

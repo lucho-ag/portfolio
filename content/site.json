@@ -25,8 +25,20 @@
     "LOADING SEQUENCE clip1"
   ],
   "contact": [
-    { "label": "LINKEDIN", "value": "linkedin.com/in/luciano-agostino", "href": "https://www.linkedin.com/in/luciano-agostino" },
-    { "label": "EMAIL", "value": "tu@email.com", "href": "mailto:tu@email.com" },
-    { "label": "GITHUB", "value": "github.com/usuario", "href": "https://github.com/usuario" }
+    {
+      "label": "EMAIL",
+      "value": "lucho.agostino@gmail.com",
+      "href": "mailto:lucho.agostino@gmail.com"
+    },
+    {
+      "label": "LINKEDIN",
+      "value": "linkedin.com/in/luciano-agostino",
+      "href": "https://www.linkedin.com/in/luciano-agostino"
+    },
+    {
+      "label": "GITHUB",
+      "value": "github.com/lucho-ag",
+      "href": "https://github.com/lucho-ag"
+    }
   ]
 }

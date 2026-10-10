@@ -1,0 +1,28 @@
+export const meta = {
+  title: "Panadería Salva",
+  summary: "Web y catálogo online para una panadería de masa madre: precios minorista/mayorista, carrito y pedidos armados por WhatsApp.",
+  year: 2026,
+  stack: ["React 19", "Vite", "Tailwind CSS v4", "LocalStorage"],
+  status: "ONLINE",
+  cover: "/textures/covers/panaderia-salva.svg",
+  repo: "https://github.com/lucho-ag/web-panaderia-salva",
+  demo: "https://web-panaderia-salva.vercel.app",
+  order: 1,
+};
+
+## El problema
+
+Una panadería artesanal de Zona Sur (Buenos Aires) necesitaba mostrar su catálogo y recibir pedidos
+tanto de clientes del barrio como de cafeterías y locales gastronómicos, sin un sistema de pagos ni
+backend propio.
+
+## Lo que hice
+
+- **Catálogo con doble modalidad:** un switch alterna en tiempo real entre precios minoristas y
+  tarifas mayoristas, con cantidades mínimas por producto para el canal de reventa.
+- **Carrito inteligente:** drawer mobile-first que permite combinar líneas minoristas y mayoristas
+  en el mismo pedido, con persistencia en LocalStorage entre recargas.
+- **Checkout por WhatsApp:** formulario de entrega (retiro o envío) que genera un mensaje con el
+  detalle ítem por ítem, tarifas, subtotales y total, listo para enviar con un clic.
+- **Identidad visual:** estética de panadería europea con Playfair Display y una paleta de tonos
+  trigo y corteza, más una sección editorial sobre la fermentación de 24 horas.

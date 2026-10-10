@@ -17,6 +17,8 @@ interface SceneState {
   activeStackGroup: number;
   /** Documento mostrado en el certificado 3D (certificaciones y luego logros). */
   selectedDocument: number;
+  /** Cambio de canal en curso (salto largo del HUD): lo dibuja components/ChannelSwitch. */
+  channelSwitch: { from: number; to: number; label: string } | null;
   setBooted: (booted: boolean) => void;
   setBootProgress: (bootProgress: number) => void;
   setActiveAct: (activeAct: ActId) => void;
@@ -24,6 +26,7 @@ interface SceneState {
   setSelectedProject: (selectedProject: number) => void;
   setActiveStackGroup: (activeStackGroup: number) => void;
   setSelectedDocument: (selectedDocument: number) => void;
+  setChannelSwitch: (channelSwitch: SceneState["channelSwitch"]) => void;
 }
 
 export const useScene = create<SceneState>((set) => ({
@@ -34,6 +37,7 @@ export const useScene = create<SceneState>((set) => ({
   selectedProject: 0,
   activeStackGroup: 0,
   selectedDocument: 0,
+  channelSwitch: null,
   setBooted: (booted) => set({ booted }),
   setBootProgress: (bootProgress) => set({ bootProgress }),
   setActiveAct: (activeAct) => set((s) => (s.activeAct === activeAct ? s : { activeAct })),
@@ -41,4 +45,5 @@ export const useScene = create<SceneState>((set) => ({
   setSelectedProject: (selectedProject) => set({ selectedProject }),
   setActiveStackGroup: (activeStackGroup) => set({ activeStackGroup }),
   setSelectedDocument: (selectedDocument) => set({ selectedDocument }),
+  setChannelSwitch: (channelSwitch) => set({ channelSwitch }),
 }));

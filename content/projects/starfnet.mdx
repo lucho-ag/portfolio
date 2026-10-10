@@ -1,0 +1,30 @@
+export const meta = {
+  title: "StarfNet",
+  summary: "Red social profesional en consola (TPO de Programación II): usuarios, conexiones, recomendaciones y bolsa de trabajo sobre TDAs propios.",
+  year: 2026,
+  stack: ["Java", "Árbol AVL", "Grafos", "Colas y pilas"],
+  status: "COMPLETED",
+  cover: "/textures/covers/starfnet.svg",
+  repo: "https://github.com/lucho-ag/TPO_Starfnet_PrograII",
+  demo: "",
+  order: 2,
+};
+
+## El problema
+
+Trabajo práctico obligatorio de Programación II (UADE), en equipo de tres: modelar el ecosistema
+de una red social laboral usando estructuras de datos implementadas desde cero.
+
+## Lo que hice
+
+Me encargué de la arquitectura base y de las estructuras centrales:
+
+- **Árbol AVL** como base de datos principal de usuarios, con búsquedas balanceadas.
+- **Árbol N-ario** para el catálogo jerárquico de habilidades técnicas.
+- **Grafo no dirigido** para la red de contactos y **cola FIFO** para solicitudes y postulantes.
+- **Intersección de conjuntos** para el motor de recomendaciones por amigos en común.
+- Las interfaces críticas del sistema, la búsqueda, la lógica de conexiones y el flujo de
+  reclutamiento y aceptación de ofertas.
+
+El sistema incluye un modo de prueba automática que recorre todas las funcionalidades simulando
+la interacción entre un reclutador y un profesional.

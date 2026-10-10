@@ -50,6 +50,25 @@ export const PAUSES: PauseDef[] = [
   { id: "certs", afterClip: "clip4", objects: ["certificate", "floppy"], objectsAt: "left", scrollLength: 120 },
 ];
 
+/**
+ * Capítulos del HUD de navegación: puntos del recorrido a los que se puede saltar sin scrollear.
+ * `anchor`: "start" = inicio del pasillo, una pausa = esa pausa ya visible, "inside" = acto 4.
+ */
+export interface ChapterDef {
+  id: string;
+  label: string;
+  anchor: "start" | PauseId | "inside";
+}
+
+export const CHAPTERS: ChapterDef[] = [
+  { id: "corridor", label: "Corridor", anchor: "start" },
+  { id: "arrival", label: "Arrival", anchor: "hero" },
+  { id: "projects", label: "Projects", anchor: "projects" },
+  { id: "stack", label: "Stack", anchor: "stack" },
+  { id: "certs", label: "Certs", anchor: "certs" },
+  { id: "terminal", label: "Terminal", anchor: "inside" },
+];
+
 /** Encendido del CRT entre el fin del clip 6 y el acto 4, en "fotogramas equivalentes". */
 export const POWER_ON_LENGTH = 36;
 

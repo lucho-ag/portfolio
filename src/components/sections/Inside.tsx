@@ -56,7 +56,7 @@ export default function Inside({
   }, [active]);
 
   return (
-    <div data-act="inside" className="invisible absolute inset-0 flex justify-center bg-void px-4 py-6 md:px-8">
+    <div data-act="inside" className="invisible absolute inset-0 flex justify-center bg-void px-4 pb-6 pt-16 md:px-8 md:pb-20 md:pt-6">
       <div className="flex h-full w-full max-w-5xl flex-col gap-4">
         <nav className="flex flex-wrap gap-x-6 gap-y-1 font-display text-xl uppercase md:text-2xl">
           {MENU.map((m) => (
