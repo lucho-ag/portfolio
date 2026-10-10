@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { IBM_Plex_Mono, VT323 } from "next/font/google";
 import CRTOverlay from "@/components/CRTOverlay";
 import { getSite } from "@/lib/content";
@@ -41,6 +42,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <CRTOverlay />
+        {/* Vercel Web Analytics: visitas por página. Solo envía datos en el deploy de Vercel. */}
+        <Analytics />
       </body>
     </html>
   );
