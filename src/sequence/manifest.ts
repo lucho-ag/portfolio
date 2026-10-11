@@ -78,7 +78,8 @@ export const INSIDE_SCROLL_LENGTH = 60;
 /** Píxeles de scroll por "fotograma equivalente". */
 export const SCROLL_PX_PER_UNIT = 64;
 
-export const SEQUENCE_WIDTH: Record<Variant, number> = { desktop: 1920, mobile: 960 };
+/** Ancho de los fotogramas por variante. Mobile es un recorte vertical 9:16 de 608×1080. */
+export const SEQUENCE_WIDTH: Record<Variant, number> = { desktop: 1920, mobile: 608 };
 
 export const TOTAL_FRAMES = CLIPS.reduce((acc, c) => acc + c.frameCount, 0);
 

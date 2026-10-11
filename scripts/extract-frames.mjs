@@ -13,9 +13,12 @@ import path from "node:path";
 import ffmpeg from "ffmpeg-static";
 
 const FPS = 12;
+// Desktop: el cuadro completo a 1920 px. Mobile: recorte vertical del centro (9:16) a alto
+// completo. En un celular vertical el canvas recorta los costados igual ("cover"): achicar el
+// cuadro entero dejaba 540 px de alto estirados ×3 y se veía borroso.
 const VARIANTS = [
-  { dir: "", width: 1920, quality: 78 },
-  { dir: "mobile", width: 960, quality: 72 },
+  { dir: "", width: 1920, quality: 78, filter: "scale=1920:-2:flags=lanczos" },
+  { dir: "mobile", width: 608, quality: 74, filter: "crop=ih*9/16:ih,scale=608:1080:flags=lanczos" },
 ];
 
 const root = process.cwd();
@@ -57,7 +60,7 @@ for (const clip of clips) {
       [
         "-hide_banner", "-loglevel", "error", "-y",
         "-i", clip.file,
-        "-vf", `fps=${FPS},scale=${v.width}:-2:flags=lanczos`,
+        "-vf", `fps=${FPS},${v.filter}`,
         "-c:v", "libwebp",
         "-quality", String(v.quality),
         "-compression_level", "6",

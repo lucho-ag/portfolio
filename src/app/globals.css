@@ -89,6 +89,63 @@ body {
 
 /* ---------- CRT overlay ---------- */
 
+/*
+ * Intensidad del overlay en variables, para poder cambiar de preset sin duplicar reglas.
+ * - classic: el look original, pensado para pantallas de escritorio.
+ * - soft: scanlines finas y tenues, grano mínimo, sin flicker. Es el default en celulares,
+ *   donde las líneas de 3 px se ven como píxeles gruesos (1 px CSS = 2-3 px físicos).
+ * - off: sin overlay.
+ * Se fuerza un preset con ?crt=classic|soft|off (ver components/CrtPreset.tsx).
+ */
+:root {
+  --scan-period: 3px;
+  --scan-line: 1px;
+  --scan-alpha: 0.35;
+  --scan-anim: crt-flicker 6s infinite steps(1);
+  --grain-opacity: 0.07;
+  --vignette-start: 55%;
+  --vignette-alpha: 0.85;
+}
+
+:root[data-crt="soft"] {
+  --scan-period: 4px;
+  --scan-alpha: 0.12;
+  --scan-anim: none;
+  --grain-opacity: 0.03;
+  --vignette-start: 62%;
+  --vignette-alpha: 0.6;
+}
+
+@media (max-width: 767px) {
+  :root:not([data-crt]) {
+    --scan-period: 4px;
+    --scan-alpha: 0.12;
+    --scan-anim: none;
+    --grain-opacity: 0.03;
+    --vignette-start: 62%;
+    --vignette-alpha: 0.6;
+  }
+}
+
+/* En pantallas de alta densidad la línea oscura puede ser de medio píxel CSS (1 px físico). */
+@media (min-resolution: 2dppx) {
+  :root[data-crt="soft"] {
+    --scan-period: 3px;
+    --scan-line: 0.5px;
+  }
+}
+
+@media (max-width: 767px) and (min-resolution: 2dppx) {
+  :root:not([data-crt]) {
+    --scan-period: 3px;
+    --scan-line: 0.5px;
+  }
+}
+
+:root[data-crt="off"] .crt-overlay {
+  display: none;
+}
+
 .crt-overlay > * {
   position: absolute;
   inset: 0;
@@ -98,22 +155,22 @@ body {
   background: repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent 2px,
-    rgb(4 8 6 / 0.35) 3px
+    transparent calc(var(--scan-period) - var(--scan-line)),
+    rgb(4 8 6 / var(--scan-alpha)) var(--scan-period)
   );
-  animation: crt-flicker 6s infinite steps(1);
+  animation: var(--scan-anim);
 }
 
 .crt-grain {
   /* Más grande que la pantalla: el salto de la animación nunca deja bordes sin grano a la vista. */
   inset: -10%;
-  opacity: 0.07;
+  opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   animation: crt-grain 0.4s steps(3) infinite;
 }
 
 .crt-vignette {
-  background: radial-gradient(ellipse at center, transparent 55%, rgb(4 8 6 / 0.85) 100%);
+  background: radial-gradient(ellipse at center, transparent var(--vignette-start), rgb(4 8 6 / var(--vignette-alpha)) 100%);
 }
 
 @keyframes crt-flicker {
